@@ -14,13 +14,14 @@
 
 namespace db
 {
-struct datenbank
-{
-std::string name;
-kfz::kennzeichen* schilder[DB_LIMIT];
-int eintraege = 0;
-};
-typedef struct datenbank datenbank;
-bool einfuegen(datenbank* db, kfz::kennzeichen* schild) { /* IHR CODE */}
-std::string ausgabe(const datenbank& db) { /* IHR CODE */ }
+	struct datenbank {
+		std::string name;
+		kfz::kennzeichen* schilder[DB_LIMIT];
+		int eintraege = 0;
+	};
+	typedef struct datenbank datenbank;
+	bool einfuegen(datenbank* db, kfz::kennzeichen* schild) {
+		/* IHR CODE */
+	}
+	std::string ausgabe(const datenbank& db) { /* IHR CODE */ }
 }
