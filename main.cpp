@@ -27,7 +27,7 @@ void schnapszahlTest() {
 }
 void einlesenTest() {
     kfz::kennzeichen* testKennzeichen = kfz::einlesen();
-    std::cout << kfz::ausgabe(*testKennzeichen) << " " << std::endl;
+    std::cout << kfz::ausgabe(*testKennzeichen) << std::endl;
     kfz::schildTest(testKennzeichen);
 }
 void datenbankTest() {

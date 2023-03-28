@@ -87,6 +87,10 @@ namespace kfz
 	bool istSchnapszahl(const kennzeichen* pKennzeichen) {
 		int zahl = pKennzeichen->zahl;
 		int letzte_ziffer = -1;
+		
+		if (zahl < 10) {
+			return false;
+		}
 
 		while (zahl > 0) {
 			int aktuelle_ziffer = zahl % 10;
