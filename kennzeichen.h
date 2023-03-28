@@ -10,7 +10,8 @@
 #pragma once
 #include <string>
 #include <iostream>
- /* IHR CODE */
+#include <limits>
+
 namespace kfz
 {
 	typedef struct kennzeichen {
@@ -37,6 +38,24 @@ namespace kfz
 
 		return ort;
 	}
+	std::string einlesenBuchstaben() {
+		std::string buchstaben;
+		bool gueltige_eingabe = false;
+
+		while (!gueltige_eingabe) {
+			std::cout << "Bitte geben Sie eine Buchstabenkombination ein (1-2 Buchstaben):";
+			std::cin >> buchstaben;
+
+			if (buchstaben.length() >= 1 && buchstaben.length() <= 2) {
+				gueltige_eingabe = true;
+			}
+			else {
+				std::cout << "Ungültige Eingabe. Die Buchstabenkombination muss 1-2 Buchstaben lang sein. Bitte versuchen Sie es erneut." << std::endl;
+			}
+		}
+
+		return buchstaben;
+	}
 	short einlesenZahl() {
 		short zahl;
 		bool gueltige_eingabe = false;
@@ -45,11 +64,13 @@ namespace kfz
 			std::cout << "Bitte geben Sie eine Zahl ein (1-9999): ";
 			std::cin >> zahl;
 
-			if (zahl >= 1 && zahl <= 9999) {
+			if (std::cin.good() && zahl >= 1 && zahl <= 9999) {
 				gueltige_eingabe = true;
 			}
 			else {
-				std::cout << "Ungültige Eingabe. Die Zahl muss zwischen 1 und 999 liegen. Bitte versuchen Sie es erneut." << std::endl;
+				std::cout << "Ungültige Eingabe. Die Zahl muss zwischen 1 und 9999 liegen. Bitte versuchen Sie es erneut." << std::endl;
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
 
@@ -59,22 +80,25 @@ namespace kfz
 		kennzeichen* pKennzeichen = new kennzeichen;
 		std::cout << "Bitte geben Sie Ihr Wunschkennzeichen ein:" << std::endl;
 		pKennzeichen->ort = einlesenOrt();
+		pKennzeichen->buchstaben = einlesenBuchstaben();
 		pKennzeichen->zahl = einlesenZahl();
 		return pKennzeichen;
 	}
 	bool istSchnapszahl(const kennzeichen* pKennzeichen) {
 		int zahl = pKennzeichen->zahl;
-		int letzte_ziffer = zahl % 10;
+		int letzte_ziffer = -1;
 
 		while (zahl > 0) {
-			int letzte_ziffer = zahl % 10;
-			zahl /= 10;
 			int aktuelle_ziffer = zahl % 10;
 
-			if (aktuelle_ziffer != letzte_ziffer) {
+			if (letzte_ziffer != -1 && aktuelle_ziffer != letzte_ziffer) {
 				return false;
 			}
+
+			letzte_ziffer = aktuelle_ziffer;
+			zahl /= 10;
 		}
+
 		return true;
 	}
 	bool istZehner(const kennzeichen* pKennzeichen) {
@@ -119,6 +143,7 @@ namespace kfz
 		}
 	}
 	std::string ausgabe(const kennzeichen& rKennzeichen) {
-		/* IHR CODE */
+		std::string ausgabe = rKennzeichen.ort + " " + rKennzeichen.buchstaben + " " + std::to_string(rKennzeichen.zahl);
+		return ausgabe;
 	}
 }
