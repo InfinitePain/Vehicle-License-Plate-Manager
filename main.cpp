@@ -32,8 +32,8 @@ void einlesenTest() {
 }
 void datenbankTest() {
     srand(time(NULL));
-    db::datenbank* testDatenbank = new db::datenbank;
-    testDatenbank->name = "Testdatenbank";
+    db::datenbank testDatenbank;
+    testDatenbank.name = "Testdatenbank";
     bool istDbVoll = false;
     int anzahlTestKennzeichen = 2;
     kfz::kennzeichen* testKennzeichen[anzahlTestKennzeichen];
@@ -45,16 +45,17 @@ void datenbankTest() {
     }
 
     for (int i = 0; i < anzahlTestKennzeichen; i++) {
-        istDbVoll = db::einfuegen(testDatenbank, testKennzeichen[i]);
+        istDbVoll = db::einfuegen(&testDatenbank, testKennzeichen[i]);
         if (istDbVoll) {
             std::cout << "Kennzeichen eingefügt: " << kfz::ausgabe(*testKennzeichen[i]) << std::endl;
         }
         else {
             std::cout << "Datenbank voll! Einfügen fehlgeschlagen." << std::endl;
+            break;
         }
     }
 
-    std::cout << db::ausgabe(*testDatenbank) << std::endl;
+    std::cout << db::ausgabe(testDatenbank) << std::endl;
 }
 int main() {
     schnapszahlTest();
