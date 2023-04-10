@@ -16,8 +16,18 @@
 
 void schnapszahlTest() {
     kfz::kennzeichen* testKennzeichen = new kfz::kennzeichen;
-    testKennzeichen->ort = "AIC";
-    testKennzeichen->buchstaben = "IP";
+    
+    int anzahlBuchstaben = rand() % 3 + 1;
+    for (int j = 0; j < anzahlBuchstaben; j++) {
+        testKennzeichen->ort += (char)(rand() % 26 + (int)'A');
+    }
+    
+    anzahlBuchstaben = rand() % 2 + 1;
+    for (int j = 0; j < anzahlBuchstaben; j++) {
+        testKennzeichen->buchstaben += (char)(rand() % 26 + (int)'A');
+    }
+
+    
     testKennzeichen->zahl = 444;
     std::cout << kfz::ausgabe(*testKennzeichen);
     std::cout << (kfz::istSchnapszahl(testKennzeichen) ? " hat eine Schnapszahl." : " hat keine Schnapszahl.") << std::endl;
@@ -39,8 +49,17 @@ void datenbankTest() {
     kfz::kennzeichen* testKennzeichen[anzahlTestKennzeichen];
     for (int i = 0; i < anzahlTestKennzeichen; i++) {
         testKennzeichen[i] = new kfz::kennzeichen;
-        testKennzeichen[i]->ort = "AIC";
-        testKennzeichen[i]->buchstaben = "IP";
+        
+        int anzahlBuchstaben = rand() % 3 + 1;
+        for (int j = 0; j < anzahlBuchstaben; j++) {
+            testKennzeichen[i]->ort += (char)(rand() % 26 + (int)'A');
+        }
+        
+        anzahlBuchstaben = rand() % 2 + 1;
+        for (int j = 0; j < anzahlBuchstaben; j++) {
+            testKennzeichen[i]->buchstaben += (char)(rand() % 26 + (int)'A');
+        }
+        
         testKennzeichen[i]->zahl = rand() % 9999 + 1;
     }
 
