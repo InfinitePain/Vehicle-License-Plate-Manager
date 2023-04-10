@@ -37,10 +37,6 @@ To compile and run the program, follow these steps:
     ./license_plate_manager
     ```
 
-## Usage
-
-When running the program, you will be prompted to input vehicle license plate information, such as the location abbreviation and plate number. The program will check for valid input and evaluate the license plate number based on the predefined criteria (e.g., "Schnapszahlen", tens, hundreds, and thousands). The license plates will be stored in a simple database, and you will be able to view the contents of the database.
-
 ## Contributing
 
 Contributions to this project are welcome. If you have any suggestions for improvements or additional features, please feel free to open an issue or submit a pull request on the project's GitHub repository.
